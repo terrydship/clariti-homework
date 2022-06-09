@@ -77,14 +77,26 @@ Once the application is up and running, you may do the following:
 
 * Use the following URL to access the `Swagger` page to visually test the solutions.
 i.e. `http://localhost:8080/homework/api/swagger-ui.html`. Expand the `Controller` section
-on the page to test the endpoints.
+on the page to test the endpoint.
 ```
 http://{host}:{port}/homework/api/swagger-ui.html
 ```
 
-Note that a `RuntimeException` will be thrown when
+* Use the following URL to access the endpoint if you are using `Postman`
 ```
-1. department is not provided
-2. Invalid combination of department, category, sub category and type is provided. i.e. Category does not exist in the given department
-3. Invalid department/category/sub category/type is provided. i.e. Input value does not come from the defined enum
+http://localhost:8080/homework/api/fees
 ```
+**Note** that it is an HTTP `POST` method, and sample payload can be
+```
+{
+    "department": "Development",
+    "category": "Quality Assurance",
+    "subCategory": "Cat1",
+    "type": null
+}
+```
+
+A `RuntimeException` will be thrown in case of
+1. `department` is not provided
+2. Invalid `combination of department, category, sub category and type` is provided. i.e. Category does not exist in the given department
+3. Invalid `department/category/sub category/type` is provided. i.e. Input value does not come from the defined enum
