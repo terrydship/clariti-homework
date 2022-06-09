@@ -30,6 +30,15 @@ public class ClaritiHomeworkService {
 
     private final List<Fee> feeList = new ArrayList<>();
 
+    /**
+     * Calculate the total fee given a combination of department, category, sub category and type
+     * <p>
+     * The idea is to group the list of raw fees by, in the order of department, category, sub category and type if provided.
+     * Once done, stream the grouped list and use a reducer to calculate the total fee, then apply the surcharge based on department.
+     *
+     * @param feeRequest a combination of department, category, sub category and type
+     * @return Total fee
+     */
     public BigDecimal getTotalFee(FeeRequest feeRequest) {
         if (feeRequest.getDepartment() == null) {
             throw new FeeException(INVALID_DEPARTMENT);
