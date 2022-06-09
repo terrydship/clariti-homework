@@ -13,6 +13,7 @@ There are 3 ways to run this Spring Boot application.
 ### General Info
 
 * A `Swagger` page is configured to visually test the endpoint after the application is up and running. See [Running the test](#running-the-test) for more details.
+* The raw fees are loaded from the `.csv` file upon application startup, in order to get a better performance when accessing the endpoint.
 * The endpoint will calculate the total fees given a combination of department, category, sub category and type. Note that `department` is mandatory, while `category`,
   `sub category` and `type` are optional. If it is not provided, the endpoint will calculate the fees for `All` the entries on that level.
 * Junit tests with `Mockito` are available to verify the correctness of the solution. 
