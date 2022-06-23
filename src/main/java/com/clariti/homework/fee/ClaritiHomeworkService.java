@@ -39,7 +39,7 @@ public class ClaritiHomeworkService {
      * @param feeRequest a combination of department, category, sub category and type
      * @return Total fee
      */
-    public BigDecimal getTotalFee(FeeRequest feeRequest) {
+    public TotalFee getTotalFee(FeeRequest feeRequest) {
         if (feeRequest.getDepartment() == null) {
             throw new FeeException(INVALID_DEPARTMENT);
         }
@@ -85,7 +85,7 @@ public class ClaritiHomeworkService {
 
         BigDecimal totalFee = groupedFeeList.stream().map(Fee::getSubTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        return applySurcharge(totalFee, feeRequest.getDepartment());
+        return new TotalFee(applySurcharge(totalFee, feeRequest.getDepartment()));
     }
 
     private BigDecimal applySurcharge(BigDecimal totalFee, Department department) {

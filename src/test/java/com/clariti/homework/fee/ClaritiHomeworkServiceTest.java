@@ -31,21 +31,21 @@ public class ClaritiHomeworkServiceTest {
     @Test
     public void testGetTotalFee_1() {
         feeRequest = new FeeRequest(Department.DEVELOPMENT, Category.QUALITY_ASSURANCE, SubCategory.CAT_1, null);
-        BigDecimal feeWithSurcharge = claritiHomeworkService.getTotalFee(feeRequest);
+        BigDecimal feeWithSurcharge = claritiHomeworkService.getTotalFee(feeRequest).getFeeWithSurcharge();
         assertEquals(BigDecimal.valueOf(110212), feeWithSurcharge);
     }
 
     @Test
     public void testGetTotalFee_2() {
         feeRequest = new FeeRequest(Department.OPERATIONS, Category.HUMAN_RESOURCES, null, null);
-        BigDecimal feeWithSurcharge = claritiHomeworkService.getTotalFee(feeRequest);
+        BigDecimal feeWithSurcharge = claritiHomeworkService.getTotalFee(feeRequest).getFeeWithSurcharge();
         assertEquals(BigDecimal.valueOf(229041), feeWithSurcharge);
     }
 
     @Test
     public void testGetTotalFee_3() {
         feeRequest = new FeeRequest(Department.DEVELOPMENT, null, SubCategory.CAT_2, Type.TYPE_A);
-        BigDecimal feeWithSurcharge = claritiHomeworkService.getTotalFee(feeRequest);
+        BigDecimal feeWithSurcharge = claritiHomeworkService.getTotalFee(feeRequest).getFeeWithSurcharge();
         assertEquals(BigDecimal.valueOf(63979), feeWithSurcharge);
     }
 
