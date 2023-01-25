@@ -13,9 +13,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.math.BigDecimal;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,7 +43,8 @@ public class ClaritiHomeworkControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(feeRequest)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.feeWithSurcharge", is(1500)));
+                .andExpect(jsonPath("$.feeWithSurcharge").value(1500))
+                .andDo(print());
 
         verify(claritiHomeworkService, times(1)).getTotalFee(nullable(FeeRequest.class));
     }
@@ -59,7 +60,8 @@ public class ClaritiHomeworkControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(feeRequest)))
                 .andExpect(status().isInternalServerError())
-                .andExpect(result -> assertTrue(result.getResolvedException() instanceof FeeException));
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof FeeException))
+                .andDo(print());
     }
 
     private static String asJsonString(final Object object) {
